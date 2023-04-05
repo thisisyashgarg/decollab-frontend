@@ -7,7 +7,13 @@ const BigButton = ({
   text: string;
   className?: string;
 }) => {
-  return <button className={`p-2 border ${className}`}>{text}</button>;
+  return (
+    <button
+      className={`p-2 border h-fit px-4 bg-[#3E8A58] text-white rounded-md ${className}`}
+    >
+      {text}
+    </button>
+  );
 };
 
 export default BigButton;
