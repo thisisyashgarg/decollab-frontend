@@ -2,12 +2,12 @@ import { Inter, Poppins } from "next/font/google";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Poppins({ subsets: ["latin"], weight: "400" });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <main className={inter.className}>
+      <main className={font.className}>
         <Component {...pageProps} />
       </main>
     </>

@@ -1,12 +1,23 @@
 import React from "react";
 import DummyImageComponent from "../DummyImageComponent";
+import Link from "next/link";
 
-const SidebarButton = ({ text, src }: { text: string; src: string }) => {
+const SidebarButton = ({
+  text,
+  src,
+  href,
+  className,
+}: {
+  text: string;
+  src: string;
+  href: string;
+  className?: string;
+}) => {
   return (
-    <div className="space-x-3 flex">
+    <Link href={href} className="space-x-3 flex">
       <img src={src} alt="" className="w-5" />
-      <h2 className={`text-xl text-gray-400`}>{text}</h2>
-    </div>
+      <h2 className={`text-xl text-gray-400 ${className}`}>{text}</h2>
+    </Link>
   );
 };
 
