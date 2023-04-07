@@ -5,7 +5,7 @@ import Sidebar from "../Sidebar";
 
 const FeedPageLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="border-4 border-red-900 h-screen p-4 ">
+    <div className=" h-screen p-4 ">
       <Navbar />
       <div className="flex justify-between">
         <Sidebar />

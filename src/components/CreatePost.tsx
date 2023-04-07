@@ -10,7 +10,7 @@ const CreatePost = () => {
     <div className="flex flex-col border p-2 m-2 space-y-2">
       <SmallInputBox
         type="text"
-        className="border w-[100%]  p-2"
+        className=" w-[100%] p-2"
         placeholder="Create a collaboration post..."
       />
       <div className="flex justify-between  items-center ">
