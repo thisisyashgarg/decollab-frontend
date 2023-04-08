@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: "AIzaSyD9N0abGk4CEcN_QDLSELueh4mbpQ7a1aQ",
   authDomain: "decollab.firebaseapp.com",
   projectId: "decollab",
   storageBucket: "decollab.appspot.com",
@@ -12,6 +13,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth();
+export const auth = getAuth(app);
 
 export default app;

@@ -1,7 +1,9 @@
-import React from "react";
+import { useAuth } from "@/context/AuthContext";
+
+import React, { FormEvent } from "react";
 
 const Login = () => {
-  return <div>Login</div>;
+  return <h1>Login Page</h1>;
 };
 
 export default Login;
