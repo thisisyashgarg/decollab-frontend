@@ -1,4 +1,4 @@
-import { auth } from "@/auth/auth";
+import { auth } from "@/firebase/auth";
 import {
   ReactNode,
   createContext,
@@ -11,16 +11,22 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   User,
+  TwitterAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
+
+const provider = new TwitterAuthProvider();
 
 type AuthContextType = {
   currentUser: User | null;
   signUp: (email: string, password: string) => Promise<UserCredential>;
+  twitterVerification: () => Promise<User | void>;
 };
 
 export const AuthContext = createContext<AuthContextType>({
   currentUser: null,
   signUp: () => Promise.reject(),
+  twitterVerification: () => Promise.reject(),
 });
 
 export function useAuth() {
@@ -32,14 +38,26 @@ export const AuthProvider = ({ children }: { children?: ReactNode }) => {
   const value = {
     currentUser,
     signUp,
+    twitterVerification,
   };
-
-  function signUp(email: string, password: string) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  console.log(currentUser);
+  async function signUp(email: string, password: string) {
+    return await createUserWithEmailAndPassword(auth, email, password);
   }
 
-  function twitterAuth(username: string) {
-    return;
+  async function twitterVerification() {
+    console.log("twitter auth called");
+    return await signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = TwitterAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        const secret = credential?.secret;
+        const user = result.user;
+        return user;
+      })
+      .catch((error) => {
+        console.log("Something went wrong", error, error.message);
+      });
   }
 
   useEffect(() => {

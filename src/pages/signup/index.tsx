@@ -4,6 +4,7 @@ import React, { FormEvent, MouseEvent, useState } from "react";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
+    companyName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -42,11 +43,21 @@ const Signup = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
+        <label htmlFor="Company Name">Company Name:</label>
+        <input
+          className="border"
+          type="text"
+          name="companyName"
+          value={formData.companyName}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div>
         <label htmlFor="email">Company Email:</label>
         <input
           className="border"
           type="email"
-          id="email"
           name="email"
           value={formData.email}
           onChange={handleInputChange}
@@ -58,7 +69,6 @@ const Signup = () => {
         <input
           className="border"
           type="password"
-          id="password"
           name="password"
           value={formData.password}
           onChange={handleInputChange}
@@ -70,7 +80,6 @@ const Signup = () => {
         <input
           className="border"
           type="password"
-          id="confirmPassword"
           name="confirmPassword"
           value={formData.confirmPassword}
           onChange={handleInputChange}

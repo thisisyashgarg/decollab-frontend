@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD9N0abGk4CEcN_QDLSELueh4mbpQ7a1aQ",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "decollab.firebaseapp.com",
   projectId: "decollab",
   storageBucket: "decollab.appspot.com",
