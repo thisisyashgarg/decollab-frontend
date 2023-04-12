@@ -71,7 +71,7 @@ const ProfileComponent = () => {
             <div className="flex">
               {Array(4)
                 .fill("")
-                .map((img) => {
+                .map(() => {
                   return (
                     <Image
                       src={LOGO_ICON}
@@ -89,7 +89,7 @@ const ProfileComponent = () => {
             <div className="flex">
               {Array(2)
                 .fill("")
-                .map((img) => {
+                .map(() => {
                   return (
                     <Image
                       src={LOGO_ICON}
