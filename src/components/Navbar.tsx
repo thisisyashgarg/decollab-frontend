@@ -4,10 +4,13 @@ import Link from "next/link";
 import { LOGO_ICON } from "@/constants";
 import SmallInputBox from "./inputBoxes/SmallInputBox";
 import logoutTheUser from "@/auth/logout";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const router = useRouter();
   async function handleLogout() {
     await logoutTheUser();
+    router.push("/login");
   }
   return (
     <nav className="flex justify-between p-2 m-2 border items-center">

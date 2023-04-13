@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children?: ReactNode }) => {
     signUp,
     twitterVerification,
   };
-  console.log(currentUser);
+
   async function signUp(email: string, password: string) {
     return await createUserWithEmailAndPassword(auth, email, password);
   }
