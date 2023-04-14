@@ -1,5 +1,4 @@
 import { signupTheUser } from "@/auth/signup";
-import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/router";
 import React, { FormEvent, useState } from "react";
 
@@ -10,7 +9,9 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
     twitterUsername: "",
+    tags: [""],
   });
+  console.log(formData);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,7 @@ const Signup = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    const { email, password, twitterUsername, companyName } = formData;
+    const { email, password, twitterUsername, companyName, tags } = formData;
     if (formData.password !== formData.confirmPassword) {
       return setErrorMessage("Passwords do not match");
     }
@@ -38,11 +39,12 @@ const Signup = () => {
         email,
         password,
         twitterUsername,
-        companyName
+        companyName,
+        tags
       );
       if (userObject._id) {
         console.log(userObject);
-        router.push("/profile");
+        router.push("/collabhub");
       } else {
         setErrorMessage(userObject[0]);
       }
@@ -95,6 +97,17 @@ const Signup = () => {
           type="password"
           name="password"
           value={formData.password}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="password">Tags:</label>
+        <input
+          className="border"
+          type="text"
+          name="tags"
+          value={formData.tags[0]}
           onChange={handleInputChange}
           required
         />

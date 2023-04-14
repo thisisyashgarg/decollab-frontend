@@ -1,19 +1,18 @@
 import { loginTheUser } from "@/auth/login";
 import { useAuth } from "@/context/AuthContext";
+import { UserDataContext } from "@/context/userDataContext";
 import { useRouter } from "next/router";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useContext, useState } from "react";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signUp } = useAuth();
   const router = useRouter();
-
+  const { setUserData } = useContext(UserDataContext);
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
     setFormData({
@@ -30,8 +29,8 @@ const Signup = () => {
       setErrorMessage("");
       const userObject = await loginTheUser(email, password);
       if (userObject._id) {
-        console.log(userObject);
-        router.push("/profile");
+        setUserData(userObject);
+        router.push("/collabhub");
       } else {
         setErrorMessage(userObject[0]);
       }

@@ -1,8 +1,10 @@
 import isAuth from "@/auth/isAuth";
 import logoutTheUser from "@/auth/logout";
+import Navbar from "@/components/Navbar";
 import ProfileComponent from "@/components/ProfileComponent";
+import { UserDataContext } from "@/context/userDataContext";
 import router, { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 export type AuthResponse = {
   isValidUser: boolean;
@@ -16,9 +18,6 @@ export type AuthResponse = {
 // }
 
 const Profile = ({ jwt, response }: { jwt: string; response: any }) => {
-  const router = useRouter();
-  // console.log(response);
-
   // useEffect(() => {
   //   if (!jwt) {
   //     logoutTheUser();
@@ -27,7 +26,12 @@ const Profile = ({ jwt, response }: { jwt: string; response: any }) => {
   //   }
   // }, []);
 
-  return <ProfileComponent />;
+  return (
+    <>
+      <Navbar />
+      <ProfileComponent />
+    </>
+  );
 };
 
 export default Profile;

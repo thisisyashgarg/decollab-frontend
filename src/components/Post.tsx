@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tag from "./Tag";
 import BigButton from "./buttons/BigButton";
 import { LOGO_ICON } from "@/constants";
 import CollabRequestModal from "./modal/CollabRequestModal";
 import SmallHeading from "./headings/SmallHeading";
+import getAllPosts from "@/auth/getAllPosts";
+
+type PostType = {
+  companyName: string;
+  followers: number;
+  description: string;
+  views: number;
+  tags: string[];
+  timeFrame: string;
+  companiesReachedOut: number;
+};
 
 const Post = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [allPosts, setAllPosts] = useState<PostType[]>();
   const handleOpen = () => setIsModalOpen((prev) => !prev);
   const handleClose = () => setIsModalOpen((prev) => !prev);
+
   return (
     <>
       <CollabRequestModal
@@ -46,7 +59,7 @@ const Post = () => {
         <BigButton
           text="Send Collaboration Request"
           className="text-xl"
-          onClick={handleOpen}
+          onClickLogic={handleOpen}
         />
       </div>
     </>

@@ -1,19 +1,21 @@
 import { LOGO_ICON } from "@/constants";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import SmallButton from "./buttons/SmallButton";
 import SmallHeading from "./headings/SmallHeading";
 import Tag from "./Tag";
 import SmallInputBox from "./inputBoxes/SmallInputBox";
+import { UserDataContext } from "@/context/userDataContext";
 
 const ProfileComponent = () => {
+  const { userData } = useContext(UserDataContext);
   return (
-    <div className="flex border-4 border-red-900 h-screen">
+    <div className="flex  h-screen">
       <div className="flex flex-col items-center border border-green-900 p-2 w-[25%] h-full justify-around">
         <div className="flex flex-col items-center space-y-2">
           <Image src={LOGO_ICON} alt={""} width={100} height={100} />
           <div className="flex">
-            <h1>GotBit</h1>
+            <h1>{userData.companyName}</h1>
             <SmallButton text="Follow +" />
           </div>
           <p>10.2K followers</p>
@@ -37,11 +39,9 @@ const ProfileComponent = () => {
         <div className="text-center">
           <SmallHeading text="Tags" />
           <div className="flex flex-wrap justify-center">
-            {Array(5)
-              .fill("")
-              .map(() => {
-                return <Tag text={"Web3"} />;
-              })}
+            {userData.tags?.map((tag) => {
+              return <Tag text={tag} />;
+            })}
           </div>
         </div>
       </div>

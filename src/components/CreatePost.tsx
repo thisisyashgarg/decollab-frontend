@@ -1,13 +1,18 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import BigButton from "./buttons/BigButton";
 import SmallInputBox from "./inputBoxes/SmallInputBox";
 import SmallButton from "./buttons/SmallButton";
+import { UserDataContext } from "@/context/userDataContext";
+import { createPost } from "@/auth/createPost";
 
 const CreatePost = () => {
+  const { userData } = useContext(UserDataContext);
   const [postDetails, setPostDetails] = useState({
+    companyName: userData.companyName,
+    followers: userData.followers,
     description: "",
     views: 0,
-    tags: "",
+    tags: [""],
     timeFrame: "",
     companiesReachedOut: 0,
   });
@@ -21,7 +26,13 @@ const CreatePost = () => {
       [name]: value,
     });
   };
-  console.log(postDetails);
+
+  async function handleSubmit(userId: string) {
+    setLoading(true);
+    await createPost(postDetails, userId);
+    console.log("post created successfully");
+    setLoading(false);
+  }
 
   return (
     <div className="flex flex-col border p-2 m-2 space-y-2">
@@ -58,6 +69,7 @@ const CreatePost = () => {
         <BigButton
           text={loading ? "Creating..." : "Create Collaboration Post"}
           disabledLogic={loading}
+          onClickLogic={() => handleSubmit(userData._id)}
         />
       </div>
       {errorMessage && <p className="text-black">{errorMessage}</p>}
