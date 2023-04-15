@@ -8,6 +8,7 @@ import { createPost } from "@/auth/createPost";
 const CreatePost = () => {
   const { userData } = useContext(UserDataContext);
   const [postDetails, setPostDetails] = useState({
+    logoUrl: userData.logoUrl,
     companyName: userData.companyName,
     followers: userData.followers,
     description: "",
@@ -30,7 +31,6 @@ const CreatePost = () => {
   async function handleSubmit(userId: string) {
     setLoading(true);
     await createPost(postDetails, userId);
-    console.log("post created successfully");
     setLoading(false);
   }
 
@@ -46,7 +46,7 @@ const CreatePost = () => {
       />
       <div className="flex justify-between items-center ">
         <div className="flex flex-col space-y-2">
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 items-center">
             <SmallInputBox
               name="tags"
               value={postDetails.tags}
@@ -55,7 +55,7 @@ const CreatePost = () => {
               placeholder="Add tags"
               handleChange={handleInputChange}
             />
-            <SmallButton text="Add Tag" />
+            <SmallButton text="Add Tag" className="py-2" />
           </div>
           <SmallInputBox
             name="timeFrame"

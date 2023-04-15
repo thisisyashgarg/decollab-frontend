@@ -18,14 +18,6 @@ export type AuthResponse = {
 // }
 
 const Profile = ({ jwt, response }: { jwt: string; response: any }) => {
-  // useEffect(() => {
-  //   if (!jwt) {
-  //     logoutTheUser();
-  //     router.push("/login");
-  //   } else {
-  //   }
-  // }, []);
-
   return (
     <>
       <Navbar />

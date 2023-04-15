@@ -9,7 +9,7 @@ import { UserDataContext, defaultUserData } from "@/context/userDataContext";
 
 const Navbar = () => {
   const router = useRouter();
-  const { setUserData } = useContext(UserDataContext);
+  const { setUserData, userData } = useContext(UserDataContext);
   async function handleLogout() {
     await logoutTheUser();
     setUserData(defaultUserData);
@@ -32,7 +32,7 @@ const Navbar = () => {
           Logout
         </button>
         <Link href="/profile" className="flex items-center space-x-2">
-          <img src={LOGO_ICON} alt="" className="w-10" />
+          <img src={userData.logoUrl} alt="" className="w-10 rounded-full" />
         </Link>
       </div>
     </nav>

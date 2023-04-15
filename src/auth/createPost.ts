@@ -42,5 +42,11 @@ export async function createPost(postDetails: Post, userId: string) {
       },
     }
   );
-  return await response.json();
+  if (response.status === 200) {
+    console.log("post created successfully");
+    return await response.json();
+  } else {
+    console.log("error creating the post");
+    return "error creating the post";
+  }
 }
