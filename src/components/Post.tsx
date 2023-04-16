@@ -45,12 +45,16 @@ const Post = () => {
         {allPosts?.map((post) => {
           return (
             <div
-              className="flex flex-col border p-4 m-2 space-y-4"
+              className="flex flex-col border rounded-md p-4 m-2 space-y-4 shadow-md"
               key={post._id}
             >
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
-                  <img src={LOGO_ICON} alt="" className="w-10" />
+                  <img
+                    src={post.logoUrl}
+                    alt=""
+                    className="w-12 rounded-full"
+                  />
                   <div className="flex flex-col">
                     <SmallHeading text={post.companyName} />
                     <p className="text-gray-400">{post.followers} followers</p>

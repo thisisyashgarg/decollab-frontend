@@ -1,17 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 
-import SmallInputBox from "../inputBoxes/SmallInputBox";
 import BigButton from "../buttons/BigButton";
 import LabelAndInput from "../labelAndInputBox/labelAndInput";
 import { UserDataContext } from "@/context/userDataContext";
-import {
-  UpdateProfileDetailsType,
-  saveProfileDetails,
-} from "@/auth/updateProfileDetails";
+import { saveProfileDetails } from "@/auth/updateProfileDetails";
+import getUserFromJWT from "@/auth/getUserIdFromJWT";
 
 type EditProfileModalProps = {
   handleClose: Function;
@@ -23,19 +20,18 @@ const EditProfileModal = ({
   handleClose,
   isModalOpen,
 }: EditProfileModalProps) => {
-  const { userData } = useContext(UserDataContext);
+  const { userData, setUserData } = useContext(UserDataContext);
   const [updateProfileDetails, setUpdateProfileDetails] = useState({
-    companyName: "",
-    logoUrl: "",
-    about: "",
+    companyName: userData.companyName,
+    logoUrl: userData.logoUrl,
+    about: userData.about,
   });
   const [loading, setLoading] = useState(false);
-
-  console.log(updateProfileDetails);
 
   async function handleSaveProfileDetails(userId: string) {
     setLoading(true);
     await saveProfileDetails(updateProfileDetails, userId);
+    console.log("post created succesfully");
     setLoading(false);
   }
 
@@ -73,7 +69,7 @@ const EditProfileModal = ({
         <Fade in={isModalOpen}>
           <Box
             sx={style}
-            className="rounded-md h-[80%] w-[70%] space-y-4 overflow-scroll"
+            className="rounded-md h-fit w-[70%] space-y-4 overflow-scroll"
           >
             <LabelAndInput
               label={"Company Name"}
@@ -89,7 +85,7 @@ const EditProfileModal = ({
               placeholder={"About Us"}
               handleChange={handleInputChange}
               name={"about"}
-              value={updateProfileDetails.about}
+              value={updateProfileDetails.about!}
             />
             <LabelAndInput
               label={"Logo URL"}
@@ -97,7 +93,7 @@ const EditProfileModal = ({
               placeholder={"Logo URL"}
               handleChange={handleInputChange}
               name={"logoUrl"}
-              value={updateProfileDetails.logoUrl}
+              value={updateProfileDetails.logoUrl!}
             />
             {/* <LabelAndInput
               label={"Tags"}

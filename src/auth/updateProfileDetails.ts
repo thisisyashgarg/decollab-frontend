@@ -23,6 +23,5 @@ export async function saveProfileDetails(updatedDeatils: any, userId: string) {
       },
     }
   );
-
   return await response.json();
 }

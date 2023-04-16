@@ -24,11 +24,10 @@ const ProfileComponent = () => {
       <div className="flex ">
         <div className="flex flex-col items-center border border-green-900 p-2 w-[28%] justify-around">
           <div className="flex flex-col items-center space-y-2 ">
-            <Image
-              src={`${userData.logoUrl}`}
-              alt={""}
-              width={100}
-              height={100}
+            <img
+              src={userData.logoUrl}
+              alt=""
+              className="w-[150px] rounded-full"
             />
             <SmallButton text="Edit Profile" onClickLogic={handleOpen} />
             <div className="flex items-center space-x-2">
@@ -65,7 +64,9 @@ const ProfileComponent = () => {
 
         <div className="border p-2  w-[75%]">
           <SmallHeading text="About Us" />
-          <SmallInputBox type={"text"} placeholder="About Us" />
+          <div className="p-4 my-2 border">
+            <p>{userData.about}</p>
+          </div>
 
           <div className="flex border space-x-2 justify-around p-2">
             <div className="flex flex-col">

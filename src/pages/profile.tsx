@@ -1,23 +1,22 @@
-import isAuth from "@/auth/isAuth";
-import logoutTheUser from "@/auth/logout";
+import getUserFromJWT from "@/auth/getUserIdFromJWT";
 import Navbar from "@/components/Navbar";
 import ProfileComponent from "@/components/ProfileComponent";
 import { UserDataContext } from "@/context/userDataContext";
-import router, { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 export type AuthResponse = {
   isValidUser: boolean;
 };
 
-// export async function getStaticProps() {
-// // const { jwt } = context.req.cookies;
-// const response = await isAuth();
-// // const isAuthorised = response.json();
-// return { props: { response } };
-// }
-
-const Profile = ({ jwt, response }: { jwt: string; response: any }) => {
+export const Profile = () => {
+  const { setUserData } = useContext(UserDataContext);
+  async function getUser() {
+    const user = await getUserFromJWT();
+    setUserData(user[0]);
+  }
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
     <>
       <Navbar />

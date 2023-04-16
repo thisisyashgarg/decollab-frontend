@@ -1,24 +1,44 @@
-import React, { ChangeEvent, useContext, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import BigButton from "./buttons/BigButton";
 import SmallInputBox from "./inputBoxes/SmallInputBox";
-import SmallButton from "./buttons/SmallButton";
 import { UserDataContext } from "@/context/userDataContext";
 import { createPost } from "@/auth/createPost";
+import getUserFromJWT from "@/auth/getUserIdFromJWT";
+import TagInput from "./inputBoxes/TagInputBox";
 
 const CreatePost = () => {
-  const { userData } = useContext(UserDataContext);
+  const { userData, setUserData } = useContext(UserDataContext);
+  const [tags, setTags] = useState<string[]>([]);
+
+  async function getUser() {
+    const user = await getUserFromJWT();
+    setUserData(user[0]);
+  }
+
   const [postDetails, setPostDetails] = useState({
-    logoUrl: userData.logoUrl,
+    logoUrl: userData.logoUrl!,
     companyName: userData.companyName,
     followers: userData.followers,
     description: "",
     views: 0,
-    tags: [""],
+    tags: tags,
     timeFrame: "",
     companiesReachedOut: 0,
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  console.log(postDetails);
+
+  useEffect(() => {
+    getUser();
+  }, [postDetails]);
+
+  useEffect(() => {
+    setPostDetails({
+      ...postDetails,
+      tags: tags,
+    });
+  }, [tags]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -35,7 +55,7 @@ const CreatePost = () => {
   }
 
   return (
-    <div className="flex flex-col border p-2 m-2 space-y-2">
+    <div className="flex flex-col   m-2 space-y-2">
       <SmallInputBox
         name="description"
         value={postDetails.description}
@@ -47,7 +67,8 @@ const CreatePost = () => {
       <div className="flex justify-between items-center ">
         <div className="flex flex-col space-y-2">
           <div className="flex space-x-2 items-center">
-            <SmallInputBox
+            <TagInput tags={tags} setTags={setTags} />
+            {/* <SmallInputBox
               name="tags"
               value={postDetails.tags}
               type="text"
@@ -55,7 +76,7 @@ const CreatePost = () => {
               placeholder="Add tags"
               handleChange={handleInputChange}
             />
-            <SmallButton text="Add Tag" className="py-2" />
+            <SmallButton text="Add Tag" className="py-2" /> */}
           </div>
           <SmallInputBox
             name="timeFrame"
@@ -67,6 +88,7 @@ const CreatePost = () => {
           />
         </div>
         <BigButton
+          className="w-min-96"
           text={loading ? "Creating..." : "Create Collaboration Post"}
           disabledLogic={loading}
           onClickLogic={() => handleSubmit(userData._id)}

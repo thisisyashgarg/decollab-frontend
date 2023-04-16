@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-
 import Link from "next/link";
 import { LOGO_ICON } from "@/constants";
 import SmallInputBox from "./inputBoxes/SmallInputBox";
-import logoutTheUser from "@/auth/logout";
 import { useRouter } from "next/router";
 import { UserDataContext, defaultUserData } from "@/context/userDataContext";
+import handleLogout from "@/helper/handleLogout";
+import logoutTheUser from "@/auth/logout";
 
 const Navbar = () => {
+  const { userData, setUserData } = useContext(UserDataContext);
   const router = useRouter();
-  const { setUserData, userData } = useContext(UserDataContext);
   async function handleLogout() {
     await logoutTheUser();
     setUserData(defaultUserData);
@@ -17,7 +17,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="flex justify-between p-2 m-2 border items-center">
+    <nav className="flex justify-between p-2 m-2  items-center">
       <Link className="flex items-center space-x-2" href={"/collabhub"}>
         <img src={LOGO_ICON} alt="" className="w-10" />
         <h1>Decollab</h1>

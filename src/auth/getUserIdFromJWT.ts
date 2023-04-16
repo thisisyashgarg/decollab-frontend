@@ -1,6 +1,4 @@
-import { AuthResponse } from "@/pages/profile";
-
-export default async function isAuth() {
+export default async function getUserFromJWT() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}auth`, {
     method: "GET",
     mode: "cors",

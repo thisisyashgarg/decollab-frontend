@@ -8,7 +8,7 @@ import SmallHeading from "./headings/SmallHeading";
 
 const NewCompanies = () => {
   return (
-    <div className="flex flex-col m-2 p-4 border w-[25vw] space-y-3 h-full  ">
+    <div className="flex flex-col m-2 p-4 border rounded-md shadow-md w-[25vw] space-y-3 h-full  ">
       <SmallHeading text="New Companies" className="text-center" />
       <div className="flex flex-col space-y-4 ">
         <Tag text="#NFT" />
