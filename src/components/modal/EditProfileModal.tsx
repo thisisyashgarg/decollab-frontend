@@ -9,6 +9,7 @@ import LabelAndInput from "../labelAndInputBox/labelAndInput";
 import { UserDataContext } from "@/context/userDataContext";
 import { saveProfileDetails } from "@/auth/updateProfileDetails";
 import getUserFromJWT from "@/auth/getUserIdFromJWT";
+import TagInput from "../inputBoxes/TagInputBox";
 
 type EditProfileModalProps = {
   handleClose: Function;
@@ -20,13 +21,25 @@ const EditProfileModal = ({
   handleClose,
   isModalOpen,
 }: EditProfileModalProps) => {
-  const { userData, setUserData } = useContext(UserDataContext);
+  const { userData } = useContext(UserDataContext);
+  const [tags, setTags] = useState<string[]>([]);
   const [updateProfileDetails, setUpdateProfileDetails] = useState({
     companyName: userData.companyName,
     logoUrl: userData.logoUrl,
     about: userData.about,
+    tags: tags,
   });
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setUpdateProfileDetails({
+      ...updateProfileDetails,
+      tags: tags,
+    });
+  }, [tags]);
+
+  console.log(updateProfileDetails);
+  console.log(tags);
 
   async function handleSaveProfileDetails(userId: string) {
     setLoading(true);
@@ -95,6 +108,8 @@ const EditProfileModal = ({
               name={"logoUrl"}
               value={updateProfileDetails.logoUrl!}
             />
+            <h2 className="text-2xl">Tags</h2>
+            <TagInput tags={tags} setTags={setTags} />
             {/* <LabelAndInput
               label={"Tags"}
               inputType={"text"}

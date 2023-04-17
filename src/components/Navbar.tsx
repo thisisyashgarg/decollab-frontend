@@ -32,7 +32,7 @@ const Navbar = () => {
           Logout
         </button>
         <Link href="/profile" className="flex items-center space-x-2">
-          <img src={userData.logoUrl} alt="" className="w-10 rounded-full" />
+          <img src={userData?.logoUrl} alt="" className="w-10 rounded-full" />
         </Link>
       </div>
     </nav>

@@ -1,8 +1,11 @@
 import { signupTheUser } from "@/auth/signup";
+import TagInput from "@/components/inputBoxes/TagInputBox";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 
 const Signup = () => {
+  const [tags, setTags] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     companyName: "",
     email: "",
@@ -11,12 +14,19 @@ const Signup = () => {
     twitterUsername: "",
     tags: [""],
   });
-  console.log(formData);
-
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
   const router = useRouter();
+
+  console.log(formData);
+  console.log(tags);
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      tags: tags,
+    });
+  }, [tags]);
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -90,6 +100,10 @@ const Signup = () => {
           required
         />
       </div>
+      {/* <div className="flex space-x-2 items-center">
+        <label>Tags:</label>
+        <TagInput tags={tags} setTags={setTags} />
+      </div> */}
       <div>
         <label htmlFor="password">Password:</label>
         <input
@@ -101,17 +115,7 @@ const Signup = () => {
           required
         />
       </div>
-      <div>
-        <label htmlFor="password">Tags:</label>
-        <input
-          className="border"
-          type="text"
-          name="tags"
-          value={formData.tags[0]}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
+
       <div>
         <label htmlFor="confirmPassword">Confirm Password:</label>
         <input
@@ -131,6 +135,12 @@ const Signup = () => {
       >
         {loading ? "Loading..." : "Sign Up"}
       </button>
+      <p>
+        Already a user?{" "}
+        <Link href={"/login"} className="text-blue-700">
+          Login
+        </Link>{" "}
+      </p>
     </form>
   );
 };

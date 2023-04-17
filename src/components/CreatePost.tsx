@@ -9,12 +9,6 @@ import TagInput from "./inputBoxes/TagInputBox";
 const CreatePost = () => {
   const { userData, setUserData } = useContext(UserDataContext);
   const [tags, setTags] = useState<string[]>([]);
-
-  async function getUser() {
-    const user = await getUserFromJWT();
-    setUserData(user[0]);
-  }
-
   const [postDetails, setPostDetails] = useState({
     logoUrl: userData.logoUrl!,
     companyName: userData.companyName,
@@ -29,16 +23,10 @@ const CreatePost = () => {
   const [loading, setLoading] = useState(false);
   console.log(postDetails);
 
-  useEffect(() => {
-    getUser();
-  }, [postDetails]);
-
-  useEffect(() => {
-    setPostDetails({
-      ...postDetails,
-      tags: tags,
-    });
-  }, [tags]);
+  async function getUser() {
+    const user = await getUserFromJWT();
+    setUserData(user[0]);
+  }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -54,6 +42,17 @@ const CreatePost = () => {
     setLoading(false);
   }
 
+  useEffect(() => {
+    getUser();
+  }, [postDetails]);
+
+  useEffect(() => {
+    setPostDetails({
+      ...postDetails,
+      tags: tags,
+    });
+  }, [tags]);
+
   return (
     <div className="flex flex-col   m-2 space-y-2">
       <SmallInputBox
@@ -68,15 +67,6 @@ const CreatePost = () => {
         <div className="flex flex-col space-y-2">
           <div className="flex space-x-2 items-center">
             <TagInput tags={tags} setTags={setTags} />
-            {/* <SmallInputBox
-              name="tags"
-              value={postDetails.tags}
-              type="text"
-              className="border p-2"
-              placeholder="Add tags"
-              handleChange={handleInputChange}
-            />
-            <SmallButton text="Add Tag" className="py-2" /> */}
           </div>
           <SmallInputBox
             name="timeFrame"

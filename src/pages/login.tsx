@@ -1,5 +1,6 @@
 import { loginTheUser } from "@/auth/login";
 import { UserDataContext } from "@/context/userDataContext";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, useContext, useState } from "react";
 
@@ -75,6 +76,12 @@ const Signup = () => {
       >
         {loading ? "Loading..." : "Login"}
       </button>
+      <p>
+        New User?{" "}
+        <Link href={"/signup"} className="text-blue-700">
+          Signup
+        </Link>{" "}
+      </p>
     </form>
   );
 };
