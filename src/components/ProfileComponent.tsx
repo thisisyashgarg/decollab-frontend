@@ -25,13 +25,13 @@ const ProfileComponent = () => {
         <div className="flex flex-col items-center border border-green-900 p-2 w-[28%] justify-around">
           <div className="flex flex-col items-center space-y-2 ">
             <img
-              src={userData.logoUrl}
+              src={userData?.logoUrl}
               alt=""
               className="w-[150px] rounded-full"
             />
             <SmallButton text="Edit Profile" onClickLogic={handleOpen} />
             <div className="flex items-center space-x-2">
-              <h1>{userData.companyName}</h1>
+              <h1>{userData?.companyName}</h1>
               <SmallButton text="Follow +" />
             </div>
             <p>{userData.followers} followers</p>

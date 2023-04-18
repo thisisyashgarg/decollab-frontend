@@ -1,8 +1,8 @@
 import React from "react";
-import SmallInputBox from "../inputBoxes/SmallInputBox";
+import SmallInputBox from "./SmallInputBox";
 
 type LabelAndInputProps = {
-  label: string;
+  label?: string;
   inputType: string;
   placeholder: string;
   handleChange?: (event: {

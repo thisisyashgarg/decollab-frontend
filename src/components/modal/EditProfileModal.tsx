@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 
 import BigButton from "../buttons/BigButton";
-import LabelAndInput from "../labelAndInputBox/labelAndInput";
+import LabelAndInput from "../inputBoxes/LabelAndInput";
 import { UserDataContext } from "@/context/userDataContext";
 import { saveProfileDetails } from "@/auth/updateProfileDetails";
 import getUserFromJWT from "@/auth/getUserIdFromJWT";
@@ -22,12 +22,14 @@ const EditProfileModal = ({
   isModalOpen,
 }: EditProfileModalProps) => {
   const { userData } = useContext(UserDataContext);
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>(userData?.tags!);
+  const [socials, setSocials] = useState<string[]>([]);
   const [updateProfileDetails, setUpdateProfileDetails] = useState({
     companyName: userData.companyName,
     logoUrl: userData.logoUrl,
     about: userData.about,
     tags: tags,
+    socialLinks: socials,
   });
   const [loading, setLoading] = useState(false);
 
@@ -35,11 +37,12 @@ const EditProfileModal = ({
     setUpdateProfileDetails({
       ...updateProfileDetails,
       tags: tags,
+      socialLinks: socials,
     });
-  }, [tags]);
+  }, [tags, socials]);
 
   console.log(updateProfileDetails);
-  console.log(tags);
+  console.log(socials);
 
   async function handleSaveProfileDetails(userId: string) {
     setLoading(true);
@@ -109,49 +112,23 @@ const EditProfileModal = ({
               value={updateProfileDetails.logoUrl!}
             />
             <h2 className="text-2xl">Tags</h2>
-            <TagInput tags={tags} setTags={setTags} />
-            {/* <LabelAndInput
-              label={"Tags"}
-              inputType={"text"}
-              placeholder={"Tags"}
-              handleChange={handleInputChange}
-              name={"tags"}
-              value={updateProfileDetails.tags[0]}
-            /> */}
-            {/* <LabelAndInput
-              label={"Funding Round Number"}
-              inputType={"text"}
-              placeholder={"Funding Round Number"}
-              handleChange={handleInputChange}
-              name={"fundings"}
-              value={updateProfileDetails.fundings.round}
-            />
-            <LabelAndInput
-              label={"Funding Round Amount"}
-              inputType="number"
-              placeholder={"Funding Round Amount"}
-              handleChange={handleInputChange}
-              name={"fundings"}
-              value={`${updateProfileDetails.fundings.amount}`}
-            />
+            <TagInput tags={tags} setTags={setTags} className="py-3" />
 
             <LabelAndInput
-              label={"Flex Post"}
+              label={"Socials"}
               inputType={"text"}
-              placeholder={"Flex Post"}
+              placeholder={"LinkedIn"}
               handleChange={handleInputChange}
-              name={"flexPosts"}
-              value={updateProfileDetails.flexPosts[0]}
+              name={"logoUrl"}
+              value={socials[0]}
             />
-
             <LabelAndInput
-              label={"Brand Collaborated"}
               inputType={"text"}
-              placeholder={"Brand Collaborated"}
+              placeholder={"Twitter"}
               handleChange={handleInputChange}
-              name={"brandsCollaborated"}
-              value={updateProfileDetails.brandsCollaborated[0]}
-            /> */}
+              name={"logoUrl"}
+              value={socials[1]}
+            />
 
             <BigButton
               text={loading ? "Saving..." : "Save Details"}

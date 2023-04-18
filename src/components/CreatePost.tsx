@@ -10,9 +10,9 @@ const CreatePost = () => {
   const { userData, setUserData } = useContext(UserDataContext);
   const [tags, setTags] = useState<string[]>([]);
   const [postDetails, setPostDetails] = useState({
-    logoUrl: userData.logoUrl!,
-    companyName: userData.companyName,
-    followers: userData.followers,
+    logoUrl: userData?.logoUrl!,
+    companyName: userData?.companyName,
+    followers: userData?.followers,
     description: "",
     views: 0,
     tags: tags,
