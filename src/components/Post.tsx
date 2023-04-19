@@ -67,8 +67,8 @@ const Post = () => {
               </div>
               <h2>{post.description}</h2>
               <div className="flex space-x-2">
-                {post.tags.map((tag) => {
-                  return <Tag text={`#${tag}`} />;
+                {post.tags.map((tag, index) => {
+                  return <Tag text={`#${tag}`} key={`postTags${index}`} />;
                 })}
               </div>
               <div className="flex justify-between">

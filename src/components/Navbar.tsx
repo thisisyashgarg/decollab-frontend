@@ -5,16 +5,15 @@ import SmallInputBox from "./inputBoxes/SmallInputBox";
 import { useRouter } from "next/router";
 import { UserDataContext, defaultUserData } from "@/context/userDataContext";
 import handleLogout from "@/helper/handleLogout";
-import logoutTheUser from "@/auth/logout";
 
 const Navbar = () => {
   const { userData, setUserData } = useContext(UserDataContext);
   const router = useRouter();
-  async function handleLogout() {
-    await logoutTheUser();
-    setUserData(defaultUserData);
-    router.push("/login");
-  }
+  // async function handleLogout() {
+  //   await logoutTheUser();
+  //   setUserData(defaultUserData);
+  //   router.push("/login");
+  // }
 
   return (
     <nav className="flex justify-between p-2 m-2  items-center">
@@ -24,9 +23,8 @@ const Navbar = () => {
       </Link>
       <SmallInputBox type={"text"} placeholder="Search" className="w-96" />
       <div className="flex space-x-2">
-        {" "}
         <button
-          onClick={handleLogout}
+          onClick={() => handleLogout(setUserData)}
           className="text-xl cursor-pointer text-gray-400"
         >
           Logout

@@ -34,7 +34,7 @@ const ProfileComponent = () => {
               <h1>{userData?.companyName}</h1>
               <SmallButton text="Follow +" />
             </div>
-            <p>{userData.followers} followers</p>
+            <p>{userData?.followers} followers</p>
           </div>
 
           <div className="space-y-2 text-center">
@@ -42,9 +42,15 @@ const ProfileComponent = () => {
             <div className="flex items-center space-x-2 ">
               {Array(3)
                 .fill("")
-                .map(() => {
+                .map((index) => {
                   return (
-                    <Image src={LOGO_ICON} alt={""} width={40} height={40} />
+                    <Image
+                      key={`team${index}`}
+                      src={LOGO_ICON}
+                      alt={""}
+                      width={40}
+                      height={40}
+                    />
                   );
                 })}
 
@@ -55,8 +61,8 @@ const ProfileComponent = () => {
           <div className="text-center">
             <SmallHeading text="Tags" />
             <div className="flex flex-wrap justify-center">
-              {userData.tags?.map((tag) => {
-                return <Tag text={`#${tag}`} />;
+              {userData?.tags?.map((tag, index) => {
+                return <Tag key={`tags${index}`} text={`#${tag}`} />;
               })}
             </div>
           </div>
@@ -65,7 +71,7 @@ const ProfileComponent = () => {
         <div className="border p-2  w-[75%]">
           <SmallHeading text="About Us" />
           <div className="p-4 my-2 border">
-            <p>{userData.about}</p>
+            <p>{userData?.about}</p>
           </div>
 
           <div className="flex border space-x-2 justify-around p-2">
@@ -89,9 +95,10 @@ const ProfileComponent = () => {
               <div className="flex">
                 {Array(4)
                   .fill("")
-                  .map(() => {
+                  .map((index) => {
                     return (
                       <Image
+                        key={`brands${index}`}
                         src={LOGO_ICON}
                         alt={"logo"}
                         width={40}
@@ -107,9 +114,10 @@ const ProfileComponent = () => {
               <div className="flex">
                 {Array(2)
                   .fill("")
-                  .map(() => {
+                  .map((index) => {
                     return (
                       <Image
+                        key={`socials${index}`}
                         src={LOGO_ICON}
                         alt={"logo"}
                         width={40}

@@ -25,9 +25,9 @@ const EditProfileModal = ({
   const [tags, setTags] = useState<string[]>(userData?.tags!);
   const [socials, setSocials] = useState<string[]>([]);
   const [updateProfileDetails, setUpdateProfileDetails] = useState({
-    companyName: userData.companyName,
-    logoUrl: userData.logoUrl,
-    about: userData.about,
+    companyName: userData?.companyName,
+    logoUrl: userData?.logoUrl,
+    about: userData?.about,
     tags: tags,
     socialLinks: socials,
   });
