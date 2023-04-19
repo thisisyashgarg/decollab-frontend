@@ -14,6 +14,7 @@ const font = Poppins({ subsets: ["latin"], weight: "400" });
 
 export default function App({ Component, pageProps }: AppProps) {
   const [userData, setUserData] = useState<UserData>(defaultUserData);
+  console.log(userData);
 
   async function getUser() {
     const user = await getUserFromJWT();

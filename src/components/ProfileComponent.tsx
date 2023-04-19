@@ -40,19 +40,7 @@ const ProfileComponent = () => {
           <div className="space-y-2 text-center">
             <SmallHeading text="Team / Advisors" />
             <div className="flex items-center space-x-2 ">
-              {Array(3)
-                .fill("")
-                .map((index) => {
-                  return (
-                    <Image
-                      key={`team${index}`}
-                      src={LOGO_ICON}
-                      alt={""}
-                      width={40}
-                      height={40}
-                    />
-                  );
-                })}
+              <Image src={LOGO_ICON} alt={""} width={40} height={40} />
 
               <SmallButton text="Add +" />
             </div>
@@ -62,7 +50,9 @@ const ProfileComponent = () => {
             <SmallHeading text="Tags" />
             <div className="flex flex-wrap justify-center">
               {userData?.tags?.map((tag, index) => {
-                return <Tag key={`tags${index}`} text={`#${tag}`} />;
+                return (
+                  <Tag key={`profileTags${tag}${index}`} text={`#${tag}`} />
+                );
               })}
             </div>
           </div>
@@ -93,38 +83,14 @@ const ProfileComponent = () => {
             <div>
               <SmallHeading text="Brands collaborated " />
               <div className="flex">
-                {Array(4)
-                  .fill("")
-                  .map((index) => {
-                    return (
-                      <Image
-                        key={`brands${index}`}
-                        src={LOGO_ICON}
-                        alt={"logo"}
-                        width={40}
-                        height={40}
-                      />
-                    );
-                  })}
+                <Image src={LOGO_ICON} alt={"logo"} width={40} height={40} />
               </div>
             </div>
 
             <div>
               <SmallHeading text="Socials" />
               <div className="flex">
-                {Array(2)
-                  .fill("")
-                  .map((index) => {
-                    return (
-                      <Image
-                        key={`socials${index}`}
-                        src={LOGO_ICON}
-                        alt={"logo"}
-                        width={40}
-                        height={40}
-                      />
-                    );
-                  })}
+                <Image src={LOGO_ICON} alt={"logo"} width={40} height={40} />
               </div>
             </div>
           </div>
