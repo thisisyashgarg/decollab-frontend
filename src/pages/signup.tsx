@@ -1,32 +1,19 @@
 import { signupTheUser } from "@/auth/signup";
-import TagInput from "@/components/inputBoxes/TagInputBox";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, useEffect, useState } from "react";
 
 const Signup = () => {
-  const [tags, setTags] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     companyName: "",
     email: "",
     password: "",
     confirmPassword: "",
     twitterUsername: "",
-    tags: [""],
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  console.log(formData);
-  console.log(tags);
-
-  useEffect(() => {
-    setFormData({
-      ...formData,
-      tags: tags,
-    });
-  }, [tags]);
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -38,7 +25,7 @@ const Signup = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    const { email, password, twitterUsername, companyName, tags } = formData;
+    const { email, password, twitterUsername, companyName } = formData;
     if (formData.password !== formData.confirmPassword) {
       return setErrorMessage("Passwords do not match");
     }
@@ -49,8 +36,7 @@ const Signup = () => {
         email,
         password,
         twitterUsername,
-        companyName,
-        tags
+        companyName
       );
       if (userObject._id) {
         console.log(userObject);
@@ -100,10 +86,7 @@ const Signup = () => {
           required
         />
       </div>
-      {/* <div className="flex space-x-2 items-center">
-        <label>Tags:</label>
-        <TagInput tags={tags} setTags={setTags} />
-      </div> */}
+
       <div>
         <label htmlFor="password">Password:</label>
         <input

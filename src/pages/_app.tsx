@@ -9,12 +9,13 @@ import {
   defaultUserData,
 } from "@/context/userDataContext";
 import getUserFromJWT from "@/auth/getUserIdFromJWT";
+import { useRouter } from "next/router";
 
 const font = Poppins({ subsets: ["latin"], weight: "400" });
 
 export default function App({ Component, pageProps }: AppProps) {
   const [userData, setUserData] = useState<UserData>(defaultUserData);
-  console.log(userData);
+  const path = useRouter().pathname;
 
   async function getUser() {
     const user = await getUserFromJWT();
@@ -22,7 +23,9 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   useEffect(() => {
-    getUser();
+    if (!(path === "/signup" || path === "/login")) {
+      getUser();
+    }
   }, []);
 
   return (

@@ -8,25 +8,21 @@ import TagInput from "./inputBoxes/TagInputBox";
 
 const CreatePost = () => {
   const { userData, setUserData } = useContext(UserDataContext);
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<{ tagName: string; id: string }[]>([]);
   const [postDetails, setPostDetails] = useState({
     logoUrl: userData?.logoUrl!,
     companyName: userData?.companyName,
     followers: userData?.followers,
     description: "",
     views: 0,
-    tags: tags,
+    tags: [""],
     timeFrame: "",
     companiesReachedOut: 0,
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  console.log(postDetails);
 
-  async function getUser() {
-    const user = await getUserFromJWT();
-    setUserData(user[0]);
-  }
+  console.log(postDetails);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -43,13 +39,9 @@ const CreatePost = () => {
   }
 
   useEffect(() => {
-    getUser();
-  }, [postDetails]);
-
-  useEffect(() => {
     setPostDetails({
       ...postDetails,
-      tags: tags,
+      tags: tags.map((tag) => tag.tagName),
     });
   }, [tags]);
 

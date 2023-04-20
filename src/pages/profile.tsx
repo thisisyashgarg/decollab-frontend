@@ -9,14 +9,6 @@ export type AuthResponse = {
 };
 
 export const Profile = () => {
-  const { setUserData } = useContext(UserDataContext);
-  async function getUser() {
-    const user = await getUserFromJWT();
-    setUserData(user[0]);
-  }
-  useEffect(() => {
-    getUser();
-  }, []);
   return (
     <>
       <Navbar />

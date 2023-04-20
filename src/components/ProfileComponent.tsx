@@ -1,12 +1,13 @@
 import { LOGO_ICON } from "@/constants";
 import Image from "next/image";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SmallButton from "./buttons/SmallButton";
 import SmallHeading from "./headings/SmallHeading";
 import Tag from "./Tag";
-import SmallInputBox from "./inputBoxes/SmallInputBox";
+
 import { UserDataContext } from "@/context/userDataContext";
 import EditProfileModal from "./modal/EditProfileModal";
+import getUserFromJWT from "@/auth/getUserIdFromJWT";
 
 const ProfileComponent = () => {
   const { userData } = useContext(UserDataContext);
@@ -50,9 +51,9 @@ const ProfileComponent = () => {
             <SmallHeading text="Tags" />
             <div className="flex flex-wrap justify-center">
               {userData?.tags?.map((tag, index) => {
-                return (
-                  <Tag key={`profileTags${tag}${index}`} text={`#${tag}`} />
-                );
+                return tag.tagName !== undefined ? (
+                  <Tag key={tag.id} text={`#${tag.tagName}`} />
+                ) : null;
               })}
             </div>
           </div>

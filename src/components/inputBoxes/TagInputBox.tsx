@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import { nanoid } from "nanoid";
 
 const TagInput = ({
   tags,
   setTags,
   className,
 }: {
-  tags: string[];
-  setTags: React.Dispatch<React.SetStateAction<string[]>>;
+  tags: { tagName: string; id: string }[];
+  setTags: React.Dispatch<
+    React.SetStateAction<{ tagName: string; id: string }[]>
+  >;
   className?: string;
 }) => {
   const handleKeyDown = (event: {
@@ -16,7 +19,7 @@ const TagInput = ({
     if (event.key === "Enter") {
       const newTag = event.currentTarget.value.trim();
       if (newTag) {
-        setTags([...tags, newTag]);
+        setTags([...tags, { tagName: newTag, id: nanoid() }]);
         event.currentTarget.value = "";
       }
     }
@@ -32,10 +35,10 @@ const TagInput = ({
     <div className="flex flex-wrap gap-2">
       {tags.map((tag, index) => (
         <div
-          key={`tagInputBox${tag}${index}`}
+          key={`tagInputBox${tag.tagName}${tag.id}`}
           className="px-2 py-1 w-fit rounded-md text-blue-900 border border-blue-900  flex items-center  "
         >
-          <span className="mr-2">#{tag}</span>
+          <span className="mr-2">#{tag.tagName}</span>
           <button
             onClick={() => handleRemoveTag(index)}
             className="text-gray-600 hover:text-gray-800"

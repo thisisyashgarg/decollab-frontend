@@ -15,7 +15,10 @@ export type UserData = {
   about?: string;
   followers: number;
   socialLinks?: string[];
-  tags?: string[];
+  tags?: {
+    tagName: string;
+    id: string;
+  }[];
   flexPosts?: string[];
   teamMembers?: {
     name: string;

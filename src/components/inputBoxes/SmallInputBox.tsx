@@ -16,7 +16,7 @@ const SmallInputBox = ({
   name?: string;
 }) => {
   return (
-    <div className="">
+    <div>
       <input
         name={name}
         value={value}
