@@ -9,7 +9,7 @@ export type UserData = {
   _id: string;
   companyName: string;
   email: string;
-  twitterUsername: string;
+
   password: string;
   logoUrl?: string;
   about?: string;
@@ -43,7 +43,7 @@ export const defaultUserData = {
   _id: "",
   companyName: "",
   email: "",
-  twitterUsername: "",
+
   password: "",
   logoUrl: "",
   about: "",

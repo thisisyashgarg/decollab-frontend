@@ -8,8 +8,6 @@ import LabelAndInput from "../inputBoxes/LabelAndInput";
 import { UserDataContext } from "@/context/userDataContext";
 import { saveProfileDetails } from "@/auth/updateProfileDetails";
 import TagInput from "../inputBoxes/TagInputBox";
-import { log } from "console";
-import getUserFromJWT from "@/auth/getUserIdFromJWT";
 
 type EditProfileModalProps = {
   handleClose: Function;
@@ -53,11 +51,6 @@ const EditProfileModal = ({
       console.log("error updating profile");
     }
     setLoading(false);
-  }
-
-  async function getUser() {
-    const user = await getUserFromJWT();
-    setUserData(user[0]);
   }
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {

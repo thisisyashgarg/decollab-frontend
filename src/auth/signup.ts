@@ -1,7 +1,7 @@
 export async function signupTheUser(
   email: string,
   password: string,
-  twitterUsername: string,
+  tags: { tagName: string; id: string }[],
   companyName: string
 ) {
   const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}signup`, {
@@ -11,7 +11,7 @@ export async function signupTheUser(
     body: JSON.stringify({
       email,
       password,
-      twitterUsername,
+      tags,
       companyName,
     }),
     headers: {

@@ -1,18 +1,16 @@
-import CreatePost from "@/components/CreatePost";
-import Post from "@/components/Post";
+import SearchResults from "@/components/SearchResults";
 import FeedPageLayout from "@/components/layouts/FeedPageLayout";
 
 import React from "react";
 
-const CollabHub = () => {
+const Search = () => {
   return (
     <FeedPageLayout>
       <div className="flex flex-col w-full h-full">
-        <CreatePost />
-        <Post />
+        <SearchResults />
       </div>
     </FeedPageLayout>
   );
 };
 
-export default CollabHub;
+export default Search;

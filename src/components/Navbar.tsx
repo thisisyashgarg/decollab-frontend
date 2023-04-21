@@ -6,20 +6,29 @@ import { UserDataContext } from "@/context/userDataContext";
 import handleLogout from "@/helper/handleLogout";
 import getSearchResults from "@/auth/getSearchResults";
 import BigButton from "./buttons/BigButton";
+import { SearchResultsContext } from "@/context/searchResultsContext";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const { searchResults, setSearchResults } = useContext(SearchResultsContext);
   const { userData, setUserData } = useContext(UserDataContext);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const router = useRouter();
+  console.log(searchResults);
 
   async function handleSearchButton(searchQuery: string) {
     const users = await getSearchResults(searchQuery);
-    console.log(users);
+    if (users.length === 0) {
+      setSearchResults([]);
+    } else {
+      setSearchResults(users);
+    }
+    router.push("/search");
   }
 
-  useEffect(() => {
-    handleSearchButton(searchQuery);
-  }, [searchQuery]);
+  // useEffect(() => {
+  //   handleSearchButton(searchQuery);
+  // }, [searchQuery]);
 
   return (
     <nav className="flex justify-between p-2 m-2  items-center">
