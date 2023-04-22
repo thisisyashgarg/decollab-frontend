@@ -10,7 +10,7 @@ const LogoNameTemp = ({
 }) => {
   return (
     <div className="flex items-center space-x-2">
-      <img src={logoUrl} alt="" className="w-10" />
+      <img src={logoUrl} alt="" className="w-10 rounded-full" />
       <h4>{text}</h4>
     </div>
   );

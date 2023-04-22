@@ -33,7 +33,7 @@ const TagInput = ({
 
   return (
     <div className="flex flex-wrap gap-2">
-      {tags.map((tag, index) => (
+      {tags?.map((tag, index) => (
         <div
           key={`tagInputBox${tag.tagName}${tag.id}`}
           className="px-2 py-1 w-fit rounded-md text-blue-900 border border-blue-900  flex items-center  "

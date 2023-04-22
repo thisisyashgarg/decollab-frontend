@@ -90,6 +90,7 @@ const EditProfileModal = ({
             className="rounded-md h-fit w-[70%] space-y-4 overflow-scroll"
           >
             <LabelAndInput
+              className="w-full"
               label={"Company Name"}
               inputType={"text"}
               placeholder={"Company Name"}
@@ -98,6 +99,7 @@ const EditProfileModal = ({
               value={updateProfileDetails.companyName}
             />
             <LabelAndInput
+              className="w-full"
               label={"About Us"}
               inputType={"text"}
               placeholder={"About Us"}
@@ -106,6 +108,7 @@ const EditProfileModal = ({
               value={updateProfileDetails.about!}
             />
             <LabelAndInput
+              className="w-full"
               label={"Logo URL"}
               inputType={"text"}
               placeholder={"Logo URL"}

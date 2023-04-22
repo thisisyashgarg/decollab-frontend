@@ -16,12 +16,11 @@ export default function App({ Component, pageProps }: AppProps) {
   const [userData, setUserData] = useState<UserData>(defaultUserData);
   const path = useRouter().pathname;
 
-  async function getUser() {
-    const user = await getUserFromJWT();
-    setUserData(user[0]);
-  }
-
   useEffect(() => {
+    async function getUser() {
+      const user = await getUserFromJWT();
+      setUserData(user[0]);
+    }
     if (!(path === "/signup" || path === "/login")) {
       getUser();
     }

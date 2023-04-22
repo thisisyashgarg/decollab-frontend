@@ -20,10 +20,11 @@ const Navbar = () => {
     const users = await getSearchResults(searchQuery);
     if (users.length === 0) {
       setSearchResults([]);
+      router.push("/search");
     } else {
       setSearchResults(users);
+      router.push("/search");
     }
-    router.push("/search");
   }
 
   // useEffect(() => {
@@ -39,10 +40,11 @@ const Navbar = () => {
       <div className="flex items-center space-x-2">
         <SmallInputBox
           type={"text"}
-          placeholder="Search"
+          placeholder="Search by tag or company name"
           className="w-96"
           name="searchQuery"
           value={searchQuery}
+          onClickLogic={() => handleSearchButton(searchQuery)}
           handleChange={(e) => setSearchQuery(e.target.value)}
         />
         <BigButton

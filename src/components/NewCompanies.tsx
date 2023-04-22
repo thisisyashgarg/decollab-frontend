@@ -3,60 +3,53 @@ import Tag from "./Tag";
 import LogoNameTemp from "./newCompanies/LogoNameTemp";
 import SmallHeading from "./headings/SmallHeading";
 import { UserData, UserDataContext } from "@/context/userDataContext";
-import { LOGO_ICON } from "@/constants";
 import getProfilesByTagName from "@/auth/getProfilesByTagName";
-import LabelAndInput from "./inputBoxes/LabelAndInput";
 
-const NewCompanies = () => {
+const NewCompanies: React.FC = () => {
   const { userData } = useContext(UserDataContext);
-  // const [relevantTags, setRelevantTags] = useState(
-  //   userData?.tags?.map((tag) => tag.tagName)
-  // );
-  // const [newCompanies, setNewCompanies] = useState<UserData[]>([]);
-  // console.log(relevantTags);
+  const [usersByTag, setUsersByTag] = useState<{ [tag: string]: UserData[] }>(
+    {}
+  );
 
-  // async function handleCompaniesByTags(tag: string): Promise<UserData[]> {
-  //   const users = await getProfilesByTagName(tag);
-  //   return users;
-  // }
-  // console.log(handleCompaniesByTags("ai"));
+  useEffect(() => {
+    async function fetchData() {
+      const usersByTag: { [tag: string]: UserData[] } = {};
+      if (userData?.tags?.length) {
+        for (const tag of userData.tags) {
+          const users = await handleCompaniesByTags(tag.tagName);
+          usersByTag[tag.tagName] = users;
+        }
+        setUsersByTag(usersByTag);
+      }
+    }
+    fetchData();
+  }, [userData]);
 
-  // async function basjdhc(tag: string) {
-  //   return <div className="flex flex-col space-y-3"></div>;
-  // }
-
-  // const jsxOfCompanies = relevantTags?.map(async (tag) => {
-  //   const relevantCompanies = await handleCompaniesByTags(tag);
-  //   console.log(relevantCompanies);
-  //   relevantCompanies.map((company) => {
-  //     return (
-  //       <div>
-  //         <LogoNameTemp text={company.companyName} logoUrl={company.logoUrl} />
-  //       </div>
-  //     );
-  //   });
-  // });
-  // console.log(jsxOfCompanies);
+  async function handleCompaniesByTags(tag: string): Promise<UserData[]> {
+    const users = await getProfilesByTagName(tag);
+    return users;
+  }
 
   return (
     <div className="flex flex-col m-2 p-4 border rounded-md shadow-md w-[25vw] space-y-3 h-full  ">
       <SmallHeading text="New Companies" className="text-center" />
       <div className="flex flex-col space-y-4 ">
         {userData?.tags?.map((tag, index) => {
+          const users = usersByTag[tag.tagName] || [];
           return (
             <div key={`newCompanies${tag}${index}`} className="space-y-2">
               <Tag text={`#${tag.tagName}`} />
               <div className="flex flex-col space-y-3">
-                {/* {(await handleCompaniesByTags(tag.tagName))?.map(
-                  (company: UserData) => {
-                    return (
+                {users.map(
+                  (user) =>
+                    userData.companyName !== user.companyName && (
                       <LogoNameTemp
-                        text={company?.companyName}
-                        logoUrl={company?.logoUrl!}
+                        key={`newCompanies${tag}${user._id}`}
+                        logoUrl={user.logoUrl}
+                        text={user.companyName}
                       />
-                    );
-                  }
-                )} */}
+                    )
+                )}
               </div>
             </div>
           );

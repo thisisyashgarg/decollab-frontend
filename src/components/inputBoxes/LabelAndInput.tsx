@@ -13,6 +13,7 @@ type LabelAndInputProps = {
   }) => void;
   name: string;
   value: string;
+  className?: string;
 };
 
 const LabelAndInput: React.FunctionComponent<LabelAndInputProps> = ({
@@ -22,11 +23,13 @@ const LabelAndInput: React.FunctionComponent<LabelAndInputProps> = ({
   handleChange,
   name,
   value,
+  className,
 }) => {
   return (
     <div className="flex flex-col space-y-2">
       <h2 className="text-2xl">{label}</h2>
       <SmallInputBox
+        className={`${className}`}
         type={inputType}
         placeholder={placeholder}
         handleChange={handleChange}

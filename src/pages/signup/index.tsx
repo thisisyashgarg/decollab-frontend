@@ -1,13 +1,18 @@
 import { signupTheUser } from "@/auth/signup";
 import TagInput from "@/components/inputBoxes/TagInputBox";
+import { nanoid } from "nanoid";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, useEffect, useState } from "react";
+import { TagProps } from "react-tagsinput";
+
+type Tag = {
+  tagName: string;
+  id: string;
+};
 
 const Signup = () => {
-  const [tags, setTags] = useState<{ tagName: string; id: string }[]>([
-    { tagName: "web3", id: "67tf7tvi6ct6tcyt6" },
-  ]);
+  const [tags, setTags] = useState<Tag[]>([{ tagName: "web3", id: nanoid() }]);
   const [formData, setFormData] = useState({
     companyName: "",
     email: "",
@@ -21,14 +26,6 @@ const Signup = () => {
 
   console.log(formData);
   console.log(tags);
-
-  useEffect(() => {
-    setFormData({
-      ...formData,
-      tags: tags,
-      // socialLinks: socials,
-    });
-  }, [tags]);
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
