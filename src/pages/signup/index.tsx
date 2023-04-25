@@ -5,6 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, useEffect, useState } from "react";
 import { TagProps } from "react-tagsinput";
+// strong passowrd recommendation
+// profile image upload feature
+// tag bug on signup
+// multiple tags on signup
+// email checker for comapany emails only,
 
 type Tag = {
   tagName: string;
