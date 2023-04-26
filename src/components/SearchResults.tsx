@@ -21,7 +21,7 @@ const SearchResults = () => {
       <div className="space-y-2">
         {searchResults?.map((company) => {
           return (
-            <div className="border p-3">
+            <div className="border p-3" key={company._id}>
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
                   <img
@@ -38,8 +38,8 @@ const SearchResults = () => {
                 <div className="flex items-center space-x-2">
                   <div>
                     Socials
-                    {company?.socialLinks?.map((social) => {
-                      return <p>{social}</p>;
+                    {company?.socialLinks?.map((social, index) => {
+                      return <p key={`${social}${index}`}>{social}</p>;
                     })}
                   </div>
                   <BigButton text="Send Request" onClickLogic={handleOpen} />
@@ -48,8 +48,8 @@ const SearchResults = () => {
 
               <div className="flex">
                 Flex Posts
-                {company?.flexPosts?.map((flex) => {
-                  return <p>{flex}</p>;
+                {company?.flexPosts?.map((flex, index) => {
+                  return <p key={`${flex}${index}`}>{flex}</p>;
                 })}
               </div>
             </div>
