@@ -10,10 +10,18 @@ import EditProfileModal from "./modal/EditProfileModal";
 import getUserFromJWT from "@/auth/getUserIdFromJWT";
 
 const ProfileComponent = () => {
-  const { userData } = useContext(UserDataContext);
+  const { userData, setUserData } = useContext(UserDataContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpen = () => setIsModalOpen((prev) => !prev);
   const handleClose = () => setIsModalOpen((prev) => !prev);
+
+  useEffect(() => {
+    async function getUser() {
+      const user = await getUserFromJWT();
+      setUserData(user[0]);
+    }
+    getUser();
+  }, []);
 
   return (
     <>

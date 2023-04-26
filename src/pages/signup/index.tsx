@@ -1,15 +1,17 @@
 import { signupTheUser } from "@/auth/signup";
 import TagInput from "@/components/inputBoxes/TagInputBox";
+import isStrongPassword from "@/helper/isStrongPassword";
+import isValidEmail from "@/helper/isValidEmail";
 import { nanoid } from "nanoid";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, useEffect, useState } from "react";
-import { TagProps } from "react-tagsinput";
-// strong passowrd recommendation
+
 // profile image upload feature
-// tag bug on signup
+
 // multiple tags on signup
-// email checker for comapany emails only,
+
+// streamchat, cometchat ( notifications )
 
 type Tag = {
   tagName: string;
@@ -32,20 +34,30 @@ const Signup = () => {
   console.log(formData);
   console.log(tags);
 
+  useEffect(() => {
+    setFormData((prev) => {
+      return { ...prev, tags: tags };
+    });
+  }, [tags]);
+
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
       [name]: value,
     });
+    setErrorMessage("");
   };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const { email, password, tags, companyName } = formData;
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password !== formData.confirmPassword)
       return setErrorMessage("Passwords do not match");
-    }
+    if (!isValidEmail(email))
+      return setErrorMessage("Please enter a valid company email");
+    if (!isStrongPassword(password))
+      return setErrorMessage("Please enter a strong password");
     try {
       setLoading(true);
       setErrorMessage("");
@@ -105,6 +117,7 @@ const Signup = () => {
             className="border"
             type="password"
             name="password"
+            minLength={8}
             value={formData.password}
             onChange={handleInputChange}
             required
@@ -117,12 +130,18 @@ const Signup = () => {
             className="border"
             type="password"
             name="confirmPassword"
+            minLength={8}
             value={formData.confirmPassword}
             onChange={handleInputChange}
             required
           />
-          {errorMessage && <div className="text-red-900">{errorMessage}</div>}
+          {errorMessage && <h2 className="text-red-900">{errorMessage}</h2>}
+          <p className="text-xs">
+            Password should contain at least one uppercase, one lowercase
+            letter, one digit, and one special character.
+          </p>
         </div>
+
         <button
           disabled={loading}
           type="submit"

@@ -16,6 +16,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const [userData, setUserData] = useState<UserData>(defaultUserData);
   const path = useRouter().pathname;
 
+  console.log(userData);
+
   useEffect(() => {
     async function getUser() {
       const user = await getUserFromJWT();

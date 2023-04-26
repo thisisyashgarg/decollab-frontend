@@ -9,6 +9,7 @@ type LabelAndInputProps = {
     target: {
       name: any;
       value: any;
+      files?: any;
     };
   }) => void;
   name: string;

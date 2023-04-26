@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { FormEvent, useContext, useEffect, useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -23,6 +23,7 @@ const EditProfileModal = ({
   const [tags, setTags] = useState<{ tagName: string; id: string }[]>(
     userData?.tags!
   );
+  const [logoInputState, setLogoInputState] = useState("");
   // const [socials, setSocials] = useState<string[]>([]);
   const [updateProfileDetails, setUpdateProfileDetails] = useState({
     companyName: userData?.companyName,
@@ -32,6 +33,8 @@ const EditProfileModal = ({
     // socialLinks: socials,
   });
   const [loading, setLoading] = useState(false);
+
+  console.log(logoInputState);
 
   useEffect(() => {
     setUpdateProfileDetails({
@@ -59,6 +62,12 @@ const EditProfileModal = ({
       ...updateProfileDetails,
       [name]: value,
     });
+  };
+
+  const handleFileChange = (e: {
+    target: { name: any; value: any; files?: any };
+  }) => {
+    const file = e.target.files[0];
   };
 
   const style = {
@@ -109,12 +118,12 @@ const EditProfileModal = ({
             />
             <LabelAndInput
               className="w-full"
-              label={"Logo URL"}
-              inputType={"text"}
-              placeholder={"Logo URL"}
-              handleChange={handleInputChange}
+              label={"Upload Logo"}
+              inputType={"file"}
+              placeholder={""}
+              handleChange={handleFileChange}
               name={"logoUrl"}
-              value={updateProfileDetails.logoUrl!}
+              value={logoInputState}
             />
             <h2 className="text-2xl">Tags</h2>
             <TagInput tags={tags} setTags={setTags} className="py-3" />
