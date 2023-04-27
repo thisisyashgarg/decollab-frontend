@@ -9,23 +9,30 @@ export type UserData = {
   _id: string;
   companyName: string;
   email: string;
-
   password: string;
   logoUrl?: string;
   about?: string;
   followers: number;
-  socialLinks?: string[];
+  socialLinks?: {
+    name: string;
+    url: string;
+  }[];
   tags?: {
     tagName: string;
     id: string;
   }[];
-  flexPosts?: string[];
+  flexPosts?: {
+    post: string;
+  }[];
   teamMembers?: {
     name: string;
     profilePic: string;
     socialLink: string;
   }[];
-  brandsCollaborated?: string[];
+  brandsCollaborated?: {
+    brandName: string;
+    brandLogo: string;
+  }[];
   posts?: {
     description: string;
     views: number;
@@ -43,7 +50,6 @@ export const defaultUserData = {
   _id: "",
   companyName: "",
   email: "",
-
   password: "",
   logoUrl: "",
   about: "",

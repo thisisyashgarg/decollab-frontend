@@ -1,7 +1,6 @@
 import { SearchResultsContext } from "@/context/searchResultsContext";
 import React, { useContext, useEffect, useState } from "react";
 import CollabRequestModal from "./modal/CollabRequestModal";
-import Image from "next/image";
 import BigButton from "./buttons/BigButton";
 
 const SearchResults = () => {
@@ -39,7 +38,7 @@ const SearchResults = () => {
                   <div>
                     Socials
                     {company?.socialLinks?.map((social, index) => {
-                      return <p key={`${social}${index}`}>{social}</p>;
+                      return <p key={`${social}${index}`}>{social.name}</p>;
                     })}
                   </div>
                   <BigButton text="Send Request" onClickLogic={handleOpen} />
@@ -49,7 +48,7 @@ const SearchResults = () => {
               <div className="flex">
                 Flex Posts
                 {company?.flexPosts?.map((flex, index) => {
-                  return <p key={`${flex}${index}`}>{flex}</p>;
+                  return <p key={`${flex}${index}`}>{flex.post}</p>;
                 })}
               </div>
             </div>
