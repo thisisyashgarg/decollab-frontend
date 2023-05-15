@@ -17,5 +17,7 @@ export default async function uploadImageToCloudinary(
     }
   );
   const data = await response.json();
+  console.log("upload done");
+
   return data;
 }

@@ -1,16 +1,12 @@
-import getUserFromJWT from "@/auth/getUserIdFromJWT";
-import Navbar from "@/components/Navbar";
-import ProfileComponent from "@/components/ProfileComponent";
-import { UserDataContext } from "@/context/userDataContext";
-import React, { useContext, useEffect } from "react";
+import Navbar from "@/components/NavbarComponent";
+import ProfileComponent from "@/components/profilePage/ProfileComponent";
+import React from "react";
 
 export type AuthResponse = {
   isValidUser: boolean;
 };
 
 export const Profile = () => {
-  const { setUserData } = useContext(UserDataContext);
-
   return (
     <>
       <Navbar />

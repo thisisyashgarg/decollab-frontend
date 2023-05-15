@@ -1,11 +1,11 @@
-import NotificationsContent from "@/components/NotificationsContent";
+import NotificationsComponent from "@/components/NotificationsComponent";
 import FeedPageLayout from "@/components/layouts/FeedPageLayout";
 import React from "react";
 
 const Notifications = () => {
   return (
     <FeedPageLayout>
-      <NotificationsContent />
+      <NotificationsComponent />
     </FeedPageLayout>
   );
 };

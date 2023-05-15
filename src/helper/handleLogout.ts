@@ -1,4 +1,4 @@
-import logoutTheUser from "@/auth/logout";
+import logoutTheUser from "@/lib/auth/logout";
 import {
   UserData,
   UserDataContext,

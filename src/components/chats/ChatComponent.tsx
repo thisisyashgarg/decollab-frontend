@@ -1,7 +1,7 @@
 import { LOGO_ICON } from "@/constants";
 import React from "react";
 
-const ChatsContent = () => {
+const ChatComponent = () => {
   return (
     <div className="flex flex-col border p-4 m-2 space-y-4 w-full h-full">
       <div className="flex space-x-2">
@@ -25,4 +25,4 @@ const ChatsContent = () => {
   );
 };
 
-export default ChatsContent;
+export default ChatComponent;

@@ -1,9 +1,9 @@
 import React, { ReactNode, useState } from "react";
-import Navbar from "../Navbar";
-import NewCompanies from "../NewCompanies";
-import Sidebar from "../Sidebar";
+import Navbar from "../NavbarComponent";
+import Sidebar from "../SidebarComponent";
 import { SearchResultsContext } from "@/context/searchResultsContext";
-import { UserData } from "@/context/userDataContext";
+import NewCompaniesSectionComponent from "../homepage/NewCompaniesSectionComponent";
+import { UserData } from "@/types/types";
 
 const FeedPageLayout = ({ children }: { children: ReactNode }) => {
   const [searchResults, setSearchResults] = useState<UserData[]>([]);
@@ -14,7 +14,7 @@ const FeedPageLayout = ({ children }: { children: ReactNode }) => {
         <div className="flex justify-between">
           <Sidebar />
           {children}
-          <NewCompanies />
+          <NewCompaniesSectionComponent />
         </div>
       </div>
     </SearchResultsContext.Provider>

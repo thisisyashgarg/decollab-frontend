@@ -4,17 +4,16 @@ import { LOGO_ICON } from "@/constants";
 import SmallInputBox from "./inputBoxes/SmallInputBox";
 import { UserDataContext } from "@/context/userDataContext";
 import handleLogout from "@/helper/handleLogout";
-import getSearchResults from "@/auth/getSearchResults";
+import getSearchResults from "@/lib/search/getSearchResults";
 import BigButton from "./buttons/BigButton";
 import { SearchResultsContext } from "@/context/searchResultsContext";
 import { useRouter } from "next/router";
 
-const Navbar = () => {
+const NavbarComponent = () => {
   const { searchResults, setSearchResults } = useContext(SearchResultsContext);
   const { userData, setUserData } = useContext(UserDataContext);
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
-  console.log(searchResults);
 
   async function handleSearchButton(searchQuery: string) {
     const users = await getSearchResults(searchQuery);
@@ -26,10 +25,6 @@ const Navbar = () => {
       router.push("/search");
     }
   }
-
-  // useEffect(() => {
-  //   handleSearchButton(searchQuery);
-  // }, [searchQuery]);
 
   return (
     <nav className="flex justify-between p-2 m-2  items-center">
@@ -68,4 +63,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarComponent;

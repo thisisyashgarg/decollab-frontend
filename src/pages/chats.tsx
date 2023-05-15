@@ -1,4 +1,4 @@
-import ChatsContent from "@/components/ChatsContent";
+import ChatComponent from "@/components/chats/ChatComponent";
 import FeedPageLayout from "@/components/layouts/FeedPageLayout";
 
 import React from "react";
@@ -6,7 +6,7 @@ import React from "react";
 const Chats = () => {
   return (
     <FeedPageLayout>
-      <ChatsContent />
+      <ChatComponent />
     </FeedPageLayout>
   );
 };

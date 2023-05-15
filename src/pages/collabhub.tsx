@@ -1,5 +1,5 @@
-import CreatePost from "@/components/CreatePost";
-import Post from "@/components/Post";
+import CreatePostComponent from "@/components/homepage/CreatePostComponent";
+import PostComponent from "@/components/homepage/PostComponent";
 import FeedPageLayout from "@/components/layouts/FeedPageLayout";
 
 import React from "react";
@@ -8,8 +8,8 @@ const CollabHub = () => {
   return (
     <FeedPageLayout>
       <div className="flex flex-col w-full h-full">
-        <CreatePost />
-        <Post />
+        <CreatePostComponent />
+        <PostComponent />
       </div>
     </FeedPageLayout>
   );

@@ -1,24 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Tag from "./Tag";
-import BigButton from "./buttons/BigButton";
+
+import BigButton from "../buttons/BigButton";
 import { LOGO_ICON } from "@/constants";
-import CollabRequestModal from "./modal/CollabRequestModal";
-import SmallHeading from "./headings/SmallHeading";
-import getAllPosts from "@/auth/getAllPosts";
+import CollabRequestModal from "../modal/CollabRequestModal";
+import SmallHeading from "../headings/SmallHeading";
+import getAllPosts from "@/lib/post/getAllPosts";
+import TagComponent from "../TagComponent";
+import { PostType, Tag } from "@/types/types";
 
-type PostType = {
-  logoUrl: string;
-  _id: string;
-  companyName: string;
-  followers: number;
-  description: string;
-  views: number;
-  tags: string[];
-  timeFrame: string;
-  companiesReachedOut: number;
-};
-
-const Post = () => {
+const PostComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [allPosts, setAllPosts] = useState<PostType[]>();
   const handleOpen = () => setIsModalOpen((prev) => !prev);
@@ -67,9 +57,12 @@ const Post = () => {
               </div>
               <h2>{post.description}</h2>
               <div className="flex space-x-2">
-                {post.tags.map((tag, index) => {
+                {post.tags.map((tag: string, index: number) => {
                   return (
-                    <Tag text={`#${tag}`} key={`createPost${tag}${index}`} />
+                    <TagComponent
+                      text={`#${tag}`}
+                      key={`createPost${tag}${index}`}
+                    />
                   );
                 })}
               </div>
@@ -92,4 +85,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default PostComponent;

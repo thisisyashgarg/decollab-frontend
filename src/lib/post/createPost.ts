@@ -1,13 +1,4 @@
-type Post = {
-  logoUrl: string;
-  companyName: string;
-  followers: number;
-  description: string;
-  views: number;
-  tags: string[];
-  timeFrame: string;
-  companiesReachedOut: number;
-};
+import { Post } from "@/types/types";
 
 export async function createPost(postDetails: Post, userId: string) {
   const response = await fetch(

@@ -1,13 +1,13 @@
 import { LOGO_ICON } from "@/constants";
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
-import SmallButton from "./buttons/SmallButton";
-import SmallHeading from "./headings/SmallHeading";
-import Tag from "./Tag";
-
+import SmallButton from "../buttons/SmallButton";
+import SmallHeading from "../headings/SmallHeading";
 import { UserDataContext } from "@/context/userDataContext";
-import EditProfileModal from "./modal/EditProfileModal";
-import getUserFromJWT from "@/auth/getUserIdFromJWT";
+import EditProfileModal from "../modal/EditProfileModal";
+import getUserFromJWT from "@/lib/auth/getUserIdFromJWT";
+import TagComponent from "../TagComponent";
+import { Tag } from "@/types/types";
 
 const ProfileComponent = () => {
   const { userData, setUserData } = useContext(UserDataContext);
@@ -58,9 +58,9 @@ const ProfileComponent = () => {
           <div className="text-center">
             <SmallHeading text="Tags" />
             <div className="flex flex-wrap justify-center">
-              {userData?.tags?.map((tag, index) => {
+              {userData?.tags?.map((tag: Tag, index: number) => {
                 return tag.tagName !== undefined ? (
-                  <Tag key={tag.id} text={`#${tag.tagName}`} />
+                  <TagComponent key={tag.id} text={`#${tag.tagName}`} />
                 ) : null;
               })}
             </div>

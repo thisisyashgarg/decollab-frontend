@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import CollabRequestModal from "./modal/CollabRequestModal";
 import BigButton from "./buttons/BigButton";
 
-const SearchResults = () => {
+const SearchResultsComponent = () => {
   const { searchResults } = useContext(SearchResultsContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpen = () => setIsModalOpen((prev) => !prev);
@@ -59,4 +59,4 @@ const SearchResults = () => {
   );
 };
 
-export default SearchResults;
+export default SearchResultsComponent;

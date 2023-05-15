@@ -1,8 +1,8 @@
 import { LOGO_ICON } from "@/constants";
 import React from "react";
-import Post from "./Post";
+import PostComponent from "./homepage/PostComponent";
 
-const NotificationsContent = () => {
+const NotificationsComponent = () => {
   return (
     <div className="flex flex-col">
       <div className="flex border p-4 m-2 mb-0  space-y-4  justify-between">
@@ -12,7 +12,7 @@ const NotificationsContent = () => {
         </div>
         <p className="text-gray-500">1 hr ago</p>
       </div>
-      <Post />
+      <PostComponent />
       <div className="flex border p-4 m-2 mb-0  space-y-4  justify-between">
         <div className="flex flex-col ">
           <h2 className="text-xl">PrimeXBT</h2>
@@ -26,4 +26,4 @@ const NotificationsContent = () => {
   );
 };
 
-export default NotificationsContent;
+export default NotificationsComponent;

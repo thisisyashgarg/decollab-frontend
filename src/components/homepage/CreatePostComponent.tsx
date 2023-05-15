@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from "react";
-import BigButton from "./buttons/BigButton";
-import SmallInputBox from "./inputBoxes/SmallInputBox";
+import BigButton from "../buttons/BigButton";
+import SmallInputBox from "../inputBoxes/SmallInputBox";
 import { UserDataContext } from "@/context/userDataContext";
-import { createPost } from "@/auth/createPost";
-import getUserFromJWT from "@/auth/getUserIdFromJWT";
-import TagInput from "./inputBoxes/TagInputBox";
+import { createPost } from "@/lib/post/createPost";
+import getUserFromJWT from "@/lib/auth/getUserIdFromJWT";
+import TagInput from "../inputBoxes/TagInputBox";
 
-const CreatePost = () => {
+const CreatePostComponent = () => {
   const { userData, setUserData } = useContext(UserDataContext);
   const [tags, setTags] = useState<{ tagName: string; id: string }[]>([]);
   const [postDetails, setPostDetails] = useState({
@@ -21,8 +21,6 @@ const CreatePost = () => {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  console.log(postDetails);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -81,4 +79,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default CreatePostComponent;

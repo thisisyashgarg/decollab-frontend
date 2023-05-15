@@ -10,14 +10,14 @@ export type UpdateProfileDetailsType = {
   fundings: [{ round: string; amount: number }];
 };
 
-export async function saveProfileDetails(updatedDeatils: any, userId: string) {
+export async function saveProfileDetails(updatedDetails: any, userId: string) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}profile/update`,
     {
       method: "POST",
       mode: "cors",
       credentials: "include",
-      body: JSON.stringify([updatedDeatils, { id: userId }]),
+      body: JSON.stringify([updatedDetails, { id: userId }]),
       headers: {
         "Content-Type": "application/json",
       },

@@ -1,8 +1,6 @@
-import { twitterAuth } from "@/auth/twitterAuth";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { twitterAuth } from "@/lib/auth/twitterAuth";
 
-const LoginPage = () => {
+const TwitterSignup = () => {
   async function handleTwitterAuth() {
     console.log(await twitterAuth());
   }
@@ -15,4 +13,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default TwitterSignup;
