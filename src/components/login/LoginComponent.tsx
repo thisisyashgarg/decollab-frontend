@@ -12,7 +12,7 @@ const LoginComponent = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { setUserData } = useContext(UserDataContext);
+  const { setUserData, userData} = useContext(UserDataContext);
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -22,6 +22,10 @@ const LoginComponent = () => {
     });
   };
 
+  console.log(userData, "userData")
+
+
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const { email, password } = formData;
@@ -29,6 +33,7 @@ const LoginComponent = () => {
       setLoading(true);
       setErrorMessage("");
       const userObject = await loginTheUser(email, password);
+      console.log(userObject, "userObject")
       if (userObject._id) {
         setUserData(userObject);
         router.push("/collabhub");
