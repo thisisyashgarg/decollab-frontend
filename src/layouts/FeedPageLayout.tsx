@@ -5,7 +5,7 @@ import NewCompaniesSectionComponent from "../components/homepage/NewCompaniesSec
 
 const FeedPageLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="border  ">
+    <div className="border bg-black">
       <Navbar />
       <div className="flex">
         <Sidebar />

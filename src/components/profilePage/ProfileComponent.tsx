@@ -15,6 +15,8 @@ const ProfileComponent = () => {
   const handleOpen = () => setIsModalOpen((prev) => !prev);
   const handleClose = () => setIsModalOpen((prev) => !prev);
 
+  console.log(userData, "userData");
+
   useEffect(() => {
     async function getUser() {
       const user = await getUserFromJWT();

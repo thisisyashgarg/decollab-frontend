@@ -3,6 +3,7 @@ import { UserDataContext } from "@/context/userDataContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useContext, FormEvent } from "react";
+import NavbarComponent from "../NavbarComponent";
 
 const LoginComponent = () => {
   const [formData, setFormData] = useState({
@@ -24,8 +25,6 @@ const LoginComponent = () => {
 
   console.log(userData, "userData")
 
-
-
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const { email, password } = formData;
@@ -33,9 +32,11 @@ const LoginComponent = () => {
       setLoading(true);
       setErrorMessage("");
       const userObject = await loginTheUser(email, password);
+
       console.log(userObject, "userObject")
-      if (userObject._id) {
-        setUserData(userObject);
+      if (userObject) {
+        setUserData(userObject?.user);
+        localStorage.setItem("jwt", userObject?.token);
         router.push("/collabhub");
       } else {
         setErrorMessage(userObject[0]);
@@ -48,8 +49,11 @@ const LoginComponent = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <>
+
+    <div className="h-screen flex justify-center items-center ">
+ <form className="space-y-4 bg-gray-100 rounded-lg p-6" onSubmit={handleSubmit}>
+      <div className="space-x-4">
         <label htmlFor="email">Company Email:</label>
         <input
           className="border"
@@ -61,7 +65,7 @@ const LoginComponent = () => {
         />
       </div>
 
-      <div>
+      <div className="space-x-4">
         <label htmlFor="password">Password:</label>
         <input
           className="border"
@@ -88,6 +92,11 @@ const LoginComponent = () => {
         </Link>{" "}
       </p>
     </form>
+
+    </div>
+    </>
+  
+   
   );
 };
 export default LoginComponent;

@@ -68,8 +68,11 @@ const SignupComponent = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div>
+
+<div className="h-screen flex justify-center items-center ">
+ <form className="space-y-4 bg-gray-100 rounded-lg p-6" onSubmit={handleSubmit}>
+     
+        <div className="space-x-4">
           <label htmlFor="Company Name">Company Name:</label>
           <input
             className="border"
@@ -80,7 +83,7 @@ const SignupComponent = () => {
             required
           />
         </div>
-        <div>
+        <div className="space-x-4">
           <label htmlFor="email">Company Email:</label>
           <input
             className="border"
@@ -91,12 +94,12 @@ const SignupComponent = () => {
             required
           />
         </div>
-        <div className="flex items-center">
+        {/* <div className="flex items-center gap-4">
           <label htmlFor="email">Add relevant tags:</label>
           <TagInput tags={tags} setTags={setTags} />
-        </div>
+        </div> */}
 
-        <div>
+        <div className="space-x-4">
           <label htmlFor="password">Password:</label>
           <input
             className="border"
@@ -109,7 +112,7 @@ const SignupComponent = () => {
           />
         </div>
 
-        <div>
+        <div className="space-x-4">
           <label htmlFor="confirmPassword">Confirm Password:</label>
           <input
             className="border"
@@ -121,7 +124,7 @@ const SignupComponent = () => {
             required
           />
           {errorMessage && <h2 className="text-red-900">{errorMessage}</h2>}
-          <p className="text-xs">
+          <p className="text-xs text-gray-400">
             Password should contain at least one uppercase, one lowercase
             letter, one digit, and one special character.
           </p>
@@ -134,14 +137,15 @@ const SignupComponent = () => {
         >
           {loading ? "Loading..." : "Sign Up"}
         </button>
-      </form>
 
-      <p>
+        <p>
         Already a user?{" "}
-        <Link href={"/login"} className="text-blue-700">
+        <Link type="button" href={"/login"} className="text-blue-700">
           Login
         </Link>{" "}
       </p>
+      </form>
+      </div>
     </>
   );
 };
